@@ -1,0 +1,1 @@
+$("#tokenform").on("submit", () => false);
