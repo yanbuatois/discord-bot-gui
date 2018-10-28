@@ -1,0 +1,25 @@
+{
+  "name": "discord-bot-gui",
+  "version": "1.0.0",
+  "description": "Electron GUI for Discord bot, to use it like a \"normal\" account, for example to test permissions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "electron . --remote-debugging-port=9222",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dracoctix/discord-bot-gui.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "gui"
+  ],
+  "author": "Dracoctix",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dracoctix/discord-bot-gui/issues"
+  },
+  "homepage": "https://github.com/dracoctix/discord-bot-gui#readme"
+}
