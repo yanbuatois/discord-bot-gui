@@ -1,8 +1,14 @@
 const ipc = require('electron').ipcRenderer;
 
 function disableForm(disabled) {
-    $('#sendButton').prop("disabled", disabled);
-    $('#token').prop("disabled", disabled);
+    const connecting = $('#connecting');
+    $('#form').prop("disabled", disabled);
+    if(disabled) {
+        connecting.removeClass("d-none");
+    }
+    else {
+        connecting.addClass("d-none");
+    }
 }
 
 $("#tokenform").on("submit", () => {

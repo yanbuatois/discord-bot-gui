@@ -11,7 +11,7 @@ let tokenWindow, mainWindow;
  */
 function createTokenWindow() {
     tokenWindow = new BrowserWindow({
-        width: 400,
+        width: 600,
         height: 300,
         center: true,
         title: "Please enter the bot token",
@@ -35,6 +35,7 @@ function createMainWindow() {
         minimizable: true,
         maximizable: true,
         autoHideMenuBar: true,
+        enableLargerThanScreen: true,
     });
 
     mainWindow.loadFile('front/main.html');
