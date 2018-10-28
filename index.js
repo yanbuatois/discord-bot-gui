@@ -44,6 +44,7 @@ function createMainWindow() {
 }
 
 app.on('window-all-closed', () => {
+    discordClient.destroy();
     app.quit();
 });
 app.on('ready', createTokenWindow);
@@ -58,15 +59,7 @@ discordClient.on('ready', () => {
 });
 
 discordClient.on('error', (err) => {
-    if(tokenWindow !== null) {
-        electron.dialog.showMessageBox(tokenWindow, {
-            type: 'error',
-            title: 'Bot connexion failed',
-            message: `The connexion to the bot failed.<br />(Error : <strong>${err.message}</strong>)`,
-        },() => {
-            tokenWindow.webContents().send('tokenFailed');
-        });
-    }
+
 });
 /**
  * End of Discord Bot Management
