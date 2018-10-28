@@ -81,6 +81,10 @@ ipcMain.on('tokenSent', (event, token) => {
     });
 });
 
+ipcMain.on('loaded', () => {
+    mainWindow.webContents.send('init', discordClient.guilds.array());
+});
+
 /**
  * End of IPC Management
  */
