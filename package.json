@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/dracoctix/discord-bot-gui#readme",
   "dependencies": {
+    "discord.js": "^11.4.2",
     "electron": "^3.0.6",
     "jquery": "^3.3.1"
   }
