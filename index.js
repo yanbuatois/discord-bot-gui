@@ -87,10 +87,14 @@ ipcMain.on('loaded', (event) => {
     event.sender.send('init', guilds);
 });
 
-ipcMain.on('changesrv', (event, index) => {
-    let server = guilds[index];
+ipcMain.on('changesrv', (event, id) => {
+    let server = discordClient.guilds.get(id);
     guildChannels = server.channels.array();
     event.sender.send('srvinfo', guildChannels);
+});
+
+ipcMain.on('changechannel', (event, id) => {
+
 });
 
 /**

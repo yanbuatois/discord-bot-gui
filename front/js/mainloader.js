@@ -1,11 +1,22 @@
+const ipc = require('electron').ipcRenderer;
+let guildsArray, channelsGroup, voiceChannels, textChannels, channels;
+
 function enableServerListeners() {
     $('.server-button').on('click', function() {
-        console.log("CLICK");
         let id = this.id;
         let serverId = id.replace('server', '');
 
         ipc.send('changesrv', serverId);
     });
+}
+
+function enableChannelListeners() {
+    $('.channel-link').on('click', function() {
+        let id = this.id;
+        let channelId = id.replace('channel', '');
+
+        ipc.send('changechannel', channelId);
+    })
 }
 
 // Sort channels
@@ -18,16 +29,13 @@ function channelsSort(a, b) {
         return 0;
 }
 
-const ipc = require('electron').ipcRenderer;
-let guildsArray, channelsGroup, voiceChannels, textChannels, channels;
-
 $('#messageform').on('submit', () => false);
 
 ipc.on('init', (event, guilds) => {
     guildsArray = guilds;
 
-    guilds.forEach((guild, index) => {
-        $('#servers').append(`<div class='row'><button class="col-lg-12 server-button" id='server${index}'>${guild.name}</button></div>`);
+    guilds.forEach((guild) => {
+        $('#servers').append(`<div class='row'><button class="col-lg-12 server-button" id='server${guild.id}'>${guild.name}</button></div>`);
     });
 
     enableServerListeners();
@@ -87,32 +95,7 @@ ipc.on('srvinfo', (event, chan) => {
         parent.append(`<div class="row"><div class="col-lg-12">V : ${channel.name}</div></div>`)
     });
 
-    // channels.forEach((channel, index) => {
-    //     let lineElement;
-    //     let contentElement = document.createElement("div");
-    //     contentElement.className = "row";
-    //     if(channel.type === 'text') {
-    //         lineElement = document.createElement("a");
-    //         lineElement.href = '#';
-    //         lineElement.className = 'channel-link ';
-    //         lineElement.id = `channel${index}`;
-    //         lineElement.title = channel.topic;
-    //         lineElement.textContent = `#${channel.name}`;
-    //     }
-    //     else if(channel.type === 'category') {
-    //         lineElement = document.createElement("strong");
-    //         lineElement.textContent = channel.name;
-    //     }
-    //     else if(channel.type === 'voice') {
-    //         lineElement = document.createElement("p");
-    //         lineElement.textContent = 'Voice : ' + channel.name;
-    //     }
-    //
-    //     lineElement.className += 'col-lg-12';
-    //     contentElement.appendChild(lineElement);
-    //     // $('#channelsList').append(`<div class="row"><a href="#" class="col-lg-12 channel-link" id="channel${index}" title="${channel.topic}">#${channel.name}</a></div>`);
-    //     $('#channelsList').append(contentElement);
-    // });
+    enableChannelListeners();
 });
 
 ipc.send('loaded');
