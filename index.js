@@ -5,6 +5,7 @@ const discordClient = new Discord.Client();
 
 
 let tokenWindow, mainWindow;
+let guilds, guildChannels;
 
 /**
  * Start of windows management
@@ -81,8 +82,15 @@ ipcMain.on('tokenSent', (event, token) => {
     });
 });
 
-ipcMain.on('loaded', () => {
-    mainWindow.webContents.send('init', discordClient.guilds.array());
+ipcMain.on('loaded', (event) => {
+    guilds = discordClient.guilds.array();
+    event.sender.send('init', guilds);
+});
+
+ipcMain.on('changesrv', (event, index) => {
+    let server = guilds[index];
+    guildChannels = server.channels.array();
+    event.sender.send('srvinfo', guildChannels);
 });
 
 /**

@@ -6,13 +6,30 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'" />
     <title>Bot management</title>
     <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-3" id="servers">
+        <div class="col-sm-2 position-fixed" id="servers">
             <div class="row">
                 <button id="pm" class="col-lg-12">PM</button>
+            </div>
+        </div>
+        <div class="col-sm-2 d-none position-fixed offset-2" id="channels">
+            <div class="row">
+                <h3>Channels</h3>
+            </div>
+            <div id="channelsList">
+                <!-- All channels in the server -->
+            </div>
+        </div>
+        <div class="col-sm-8 d-none offset-4" id="messageszone">
+            <div class="row" id="messages"></div>
+            <div class="row fixed-bottom">
+                <form class="col-lg-12" id="messageform">
+                    <input type="text" class="form-control" placeholder="Message..." id="messagefield" />
+                </form>
             </div>
         </div>
     </div>
