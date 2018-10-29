@@ -116,11 +116,11 @@ ipc.on('channelok', () => {
 });
 
 ipc.on('newmessage', (event, message) => {
-    let {author, content} = message;
+    let {author, content, id} = message;
     content = htmlspecialchars(content);
     // content = markdown.toHTML(content);
     content = markdown.renderInline(content);
-    $('#messages').append(`<div class="row col-lg-12"><div class="col-lg-12"><strong>${author.username} :</strong> ${content}</div></div>`);
+    $('#messages').append(`<div class="col-lg-12" id="msg${id}"><strong id="msgauthor${id}">${author.username} :</strong> <span id="msgcontent${id}">${content}</span></div>`);
 });
 
 ipc.send('loaded');
