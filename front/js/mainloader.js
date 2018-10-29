@@ -10,6 +10,8 @@ function enableServerListeners() {
         let serverId = id.replace('server', '');
 
         ipc.send('changesrv', serverId);
+
+        $('#messageszone').addClass('d-none');
     });
 }
 
@@ -19,8 +21,7 @@ function enableChannelListeners() {
         let channelId = id.replace('channel', '');
 
         ipc.send('changechannel', channelId);
-        $('#messageszone').addClass('d-none');
-    })
+    });
 }
 
 // Sort channels
