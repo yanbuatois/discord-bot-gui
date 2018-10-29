@@ -78,14 +78,7 @@ discordClient.on('error', (err) => {
 
 discordClient.on('message', (message) => {
     if(message.channel === actualChannel) {
-        let sendPromise = mainWindow.webContents.send('newmessage', message);
-        sendPromise.then(null, (err) => {
-            electron.dialog.showMessageBox(mainWindow, {
-                type: 'error',
-                title: 'The message cannot be sent',
-                message: `The message cannot be sent.\n(Error : ${err.message})`,
-            });
-        });
+        mainWindow.webContents.send('newmessage', message);
     }
 });
 /**
@@ -126,7 +119,15 @@ ipcMain.on('changechannel', (event, id) => {
 });
 
 ipcMain.on('post', (event , message) => {
-    actualChannel.send(message);
+    const sendPromise = actualChannel.send(message);
+
+    sendPromise.then(null, (err) => {
+        electron.dialog.showMessageBox(mainWindow, {
+            type: 'error',
+            title: 'The message cannot be sent',
+            message: `The message cannot be sent.\n(Error : ${err.message})`,
+        });
+    });
 });
 
 /**
