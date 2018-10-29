@@ -61,7 +61,17 @@ discordClient.on('ready', () => {
 });
 
 discordClient.on('error', (err) => {
-
+    electron.dialog.showMessageBox(mainWindow, {
+        type: 'error',
+        title: 'An error occurred !',
+        message: `An error occurred with the bot connexion.\n(Error : ${err.message})\n`,
+        buttons: ['Disconnect', 'Continue'],
+    }, (response => {
+        if(response === 0) {
+            createTokenWindow();
+            mainWindow.close();
+        }
+    }));
 });
 /**
  * End of Discord Bot Management
