@@ -75,6 +75,19 @@ discordClient.on('error', (err) => {
         }
     }));
 });
+
+discordClient.on('message', (message) => {
+    if(message.channel === actualChannel) {
+        let sendPromise = mainWindow.webContents.send('newmessage', message);
+        sendPromise.then(null, (err) => {
+            electron.dialog.showMessageBox(mainWindow, {
+                type: 'error',
+                title: 'The message cannot be sent',
+                message: `The message cannot be sent.\n(Error : ${err.message})`,
+            });
+        });
+    }
+});
 /**
  * End of Discord Bot Management
  * Start of IPC Management

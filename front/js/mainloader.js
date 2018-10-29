@@ -1,4 +1,7 @@
 const ipc = require('electron').ipcRenderer;
+const htmlspecialchars = require('htmlspecialchars');
+const MarkdownIt = require('markdown-it');
+const markdown = new MarkdownIt;
 let guildsArray, channelsGroup, voiceChannels, textChannels, channels;
 
 function enableServerListeners() {
@@ -32,8 +35,12 @@ function channelsSort(a, b) {
 
 $('#messageform').on('submit', () => {
     let messageField = $('#messagefield');
-    ipc.send('post', messageField.val());
+    if(messageField.val() !== '') {
+        ipc.send('post', messageField.val());
+    }
+
     messageField.val('');
+
     return false;
 });
 
@@ -104,8 +111,16 @@ ipc.on('srvinfo', (event, chan) => {
     enableChannelListeners();
 });
 
-ipc.on('channelok', (event) => {
+ipc.on('channelok', () => {
     $('#messageszone').removeClass('d-none');
+});
+
+ipc.on('newmessage', (event, message) => {
+    let {author, content} = message;
+    content = htmlspecialchars(content);
+    // content = markdown.toHTML(content);
+    content = markdown.renderInline(content);
+    $('#messages').append(`<div class="row col-lg-12"><div class="col-lg-12"><strong>${author.username} :</strong> ${content}</div></div>`);
 });
 
 ipc.send('loaded');
