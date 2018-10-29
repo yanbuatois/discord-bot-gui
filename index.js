@@ -7,6 +7,8 @@ const discordClient = new Discord.Client();
 let tokenWindow, mainWindow;
 let guilds, guildChannels;
 
+let actualChannel = null;
+
 /**
  * Start of windows management
  */
@@ -98,13 +100,20 @@ ipcMain.on('loaded', (event) => {
 });
 
 ipcMain.on('changesrv', (event, id) => {
+    actualChannel = null;
     let server = discordClient.guilds.get(id);
     guildChannels = server.channels.array();
     event.sender.send('srvinfo', guildChannels);
 });
 
 ipcMain.on('changechannel', (event, id) => {
+    actualChannel = discordClient.channels.get(id);
 
+    event.sender.send('channelok');
+});
+
+ipcMain.on('post', (event , message) => {
+    actualChannel.send(message);
 });
 
 /**

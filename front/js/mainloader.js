@@ -16,6 +16,7 @@ function enableChannelListeners() {
         let channelId = id.replace('channel', '');
 
         ipc.send('changechannel', channelId);
+        $('#messageszone').addClass('d-none');
     })
 }
 
@@ -29,7 +30,12 @@ function channelsSort(a, b) {
         return 0;
 }
 
-$('#messageform').on('submit', () => false);
+$('#messageform').on('submit', () => {
+    let messageField = $('#messagefield');
+    ipc.send('post', messageField.val());
+    messageField.val('');
+    return false;
+});
 
 ipc.on('init', (event, guilds) => {
     guildsArray = guilds;
@@ -96,6 +102,10 @@ ipc.on('srvinfo', (event, chan) => {
     });
 
     enableChannelListeners();
+});
+
+ipc.on('channelok', (event) => {
+    $('#messageszone').removeClass('d-none');
 });
 
 ipc.send('loaded');
