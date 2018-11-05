@@ -11,7 +11,7 @@ function enableServerListeners() {
 
         ipc.send('changesrv', serverId);
 
-        $('#messageszone').addClass('d-none');
+        leaveChannel();
     });
 }
 
@@ -32,6 +32,23 @@ function channelsSort(a, b) {
         return 1;
     else
         return 0;
+}
+
+function leaveChannel() {
+    $('#messageszone').addClass('d-none');
+    $('#messages').empty();
+}
+
+/**
+ * Disable existing HTML tags, and convert markdown
+ * @param content Message content
+ * @return Decoded message
+ */
+function decodeMessage(content) {
+    let endContent = htmlspecialchars(content);
+    endContent = markdown.renderInline(content);
+
+    return endContent
 }
 
 $('#messageform').on('submit', () => {
@@ -80,7 +97,7 @@ ipc.on('srvinfo', (event, chan) => {
     });
 
     channelsGroup.forEach((channel) => {
-        $('#channelsList').append(`<div id="ccategory${channel.id}"><div class="row"><strong class="col-lg-12">${channel.name}</strong></div></div>`);
+        $('#channelsList').append(`<div id="ccategory${channel.id}" class="col-lg-12"><div class="row"><strong class="col-lg-12">${channel.name}</strong></div></div>`);
     });
 
     textChannels.forEach((channel) => {
@@ -118,10 +135,15 @@ ipc.on('channelok', () => {
 
 ipc.on('newmessage', (event, message) => {
     let {author, content, id} = message;
-    content = htmlspecialchars(content);
-    // content = markdown.toHTML(content);
-    content = markdown.renderInline(content);
-    $('#messages').append(`<div class="col-lg-12" id="msg${id}"><strong id="msgauthor${id}">${author.username} :</strong> <span id="msgcontent${id}">${content}</span></div>`);
+    content = decodeMessage(content);
+    $('#messages').append(`<div class="row" id="msg${id}"><div class="col-lg-12"><strong id="msgauthor${id}">${author.username} :</strong> <span id="msgcontent${id}">${content}</span></div></div>`);
+});
+
+ipc.on('updatedMessage', (event, oldMessage, newMessage) => {
+    let messageId = oldMessage.id;
+    let content = decodeMessage(newMessage.content);
+    $(`#msgcontent${messageId}`).html(`${content} <span class="font-italic font-weight-bold">(edited)</span>`);
+
 });
 
 ipc.send('loaded');

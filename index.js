@@ -81,6 +81,13 @@ discordClient.on('message', (message) => {
         mainWindow.webContents.send('newmessage', message);
     }
 });
+
+discordClient.on('messageUpdate', (oldMessage, newMessage) => {
+    if(newMessage.channel === actualChannel) {
+        mainWindow.webContents.send('updatedMessage', oldMessage, newMessage);
+    }
+});
+
 /**
  * End of Discord Bot Management
  * Start of IPC Management
