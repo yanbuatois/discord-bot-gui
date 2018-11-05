@@ -88,6 +88,12 @@ discordClient.on('messageUpdate', (oldMessage, newMessage) => {
     }
 });
 
+discordClient.on('messageDelete', (message) => {
+    if(message.channel === actualChannel) {
+        mainWindow.webContents.send('deletedMessage', message);
+    }
+});
+
 /**
  * End of Discord Bot Management
  * Start of IPC Management

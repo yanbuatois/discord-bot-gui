@@ -146,4 +146,10 @@ ipc.on('updatedMessage', (event, oldMessage, newMessage) => {
 
 });
 
+ipc.on('deletedMessage', (event, message) => {
+    let {id} = message;
+    $(`#msg${id}`).addClass("deletedMessage");
+    $(`#msgcontent${id}`).append(" <span class='font-italic font-weight-bold'>(deleted)</span>")
+});
+
 ipc.send('loaded');

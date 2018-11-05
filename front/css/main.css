@@ -5,3 +5,7 @@
 .bottom-0 {
     bottom: 0;
 }
+
+.deletedMessage {
+    color: grey;
+}
