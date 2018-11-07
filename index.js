@@ -1,5 +1,5 @@
 const electron = require('electron');
-const {app, BrowserWindow, ipcMain} = electron;
+const {app, BrowserWindow, ipcMain, clipboard} = electron;
 const Discord = require('discord.js');
 const discordClient = new Discord.Client();
 
@@ -66,7 +66,7 @@ discordClient.on('error', (err) => {
     electron.dialog.showMessageBox(mainWindow, {
         type: 'error',
         title: 'An error occurred !',
-        message: `An error occurred with the bot connexion.\n(Error : ${err.message})\n`,
+        message: `An error occurred with the bot connexion.\n(Error: ${err.message})\n`,
         buttons: ['Disconnect', 'Continue'],
     }, (response => {
         if(response === 0) {
@@ -106,7 +106,7 @@ ipcMain.on('tokenSent', (event, token) => {
         electron.dialog.showMessageBox(tokenWindow, {
             type: 'error',
             title: 'Bot connexion failed',
-            message: `The connexion to the bot failed.\n(Error : ${err.message})`,
+            message: `The connexion to the bot failed.\n(Error: ${err.message})`,
         },() => {
             tokenWindow.webContents.send('tokenFailed');
         });
@@ -138,8 +138,31 @@ ipcMain.on('post', (event , message) => {
         electron.dialog.showMessageBox(mainWindow, {
             type: 'error',
             title: 'The message cannot be sent',
-            message: `The message cannot be sent.\n(Error : ${err.message})`,
+            message: `The message cannot be sent.\n(Error: ${err.message})`,
         });
+    });
+});
+
+ipcMain.on('generateinvitation', (event, channelId) => {
+    let channel = discordClient.channels.get(channelId);
+
+    channel.createInvite({maxAge: 0}).then((invite) => {
+        electron.dialog.showMessageBox(mainWindow, {
+            type: 'info',
+            title: 'The invitation was created',
+            message: `The invitation was created with following code:\n${invite.code}`,
+            buttons: ['Ok', 'Copy']
+        }, (response) => {
+            if(response === 1) {
+                clipboard.writeText(invite.code);
+            }
+        });
+    }, (err) => {
+        electron.dialog.showMessageBox(mainWindow, {
+            type: 'error',
+            title: 'Invitation cannot be created',
+            message: `The invitation creation failed.\n(Error: ${err.message}`,
+        }, () => {});
     });
 });
 

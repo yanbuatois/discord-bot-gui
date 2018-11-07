@@ -1,4 +1,5 @@
 const ipc = require('electron').ipcRenderer;
+const {remote} = require('electron');
 const htmlspecialchars = require('htmlspecialchars');
 const MarkdownIt = require('markdown-it');
 const markdown = new MarkdownIt;
@@ -21,6 +22,21 @@ function enableChannelListeners() {
         let channelId = id.replace('channel', '');
 
         ipc.send('changechannel', channelId);
+    }).on('contextmenu', function(event) {
+        event.preventDefault();
+        let id = this.id;
+        let channelId = id.replace('channel', '');
+        const template = [
+            {
+                label: 'Generate an invitation',
+                click: () => {
+                    ipc.send('generateinvitation',channelId);
+                }
+            }
+        ];
+
+        const menu = remote.Menu.buildFromTemplate(template);
+        menu.popup({});
     });
 }
 
