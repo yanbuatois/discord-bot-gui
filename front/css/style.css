@@ -11,3 +11,8 @@
 .deletedMessage {
     color: grey;
 }
+
+html, body, body > .container-fluid, body > .container-fluid > .row {
+    height: 100%;
+}
+
