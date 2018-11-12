@@ -1,3 +1,5 @@
+@import url("bootstrap.min.css");
+
 .overflow-scroll {
     overflow-y: scroll;
 }

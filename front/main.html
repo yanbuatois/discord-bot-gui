@@ -1,46 +1,48 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'" />
     <title>Bot management</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-2" id="servers">
-            <div class="row">
-                <button id="pm" class="col-lg-12">PM</button>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2" id="servers">
+                <div class="row">
+                    <button id="pm" class="col-lg-12">PM</button>
+                </div>
+                <!-- All servers for the bot -->
             </div>
-            <!-- All servers for the bot -->
-        </div>
-        <div class="col-sm-2 d-none" id="channels">
-            <div class="row">
-                <h3>Channels</h3>
-            </div>
-            <div class="row" id="channelsList">
-                <!-- All channels in the server -->
-            </div>
-        </div>
-        <div class="col-sm-8 d-none" id="messageszone">
-            <div class="row">
-                <div class="col-lg-12" id="messages">
-                    <!-- All messages -->
+            <div class="col-sm-2 d-none" id="channels">
+                <div class="row">
+                    <h3>Channels</h3>
+                </div>
+                <div class="row" id="channelsList">
+                    <!-- All channels in the server -->
                 </div>
             </div>
-            <div class="row fixed-bottom">
-                <form class="col-sm-8 offset-4" id="messageform">
-                    <input type="text" class="form-control" placeholder="Message..." id="messagefield" />
-                </form>
+            <div class="col-sm-8 d-none" id="messageszone">
+                <div class="row">
+                    <div class="col-lg-12" id="messages">
+                        <!-- All messages -->
+                    </div>
+                </div>
+                <div class="row fixed-bottom">
+                    <form class="col-sm-8 offset-4" id="messageform">
+                        <input type="text" class="form-control" placeholder="Message..." id="messagefield" />
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/mainloader.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/mainloader.js"></script>
 </body>
+
 </html>
