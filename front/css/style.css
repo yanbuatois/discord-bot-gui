@@ -21,6 +21,10 @@ body {
     background-color: #36393f;
 }
 
+.color-darkgray {
+    color: #6d7078;
+}
+
 #servers {
     background-color: #202225;
 }
@@ -42,16 +46,29 @@ body {
 
 label {
     color: #afb1b3;
+    text-transform: uppercase;
+    font-size: 0.7em;
+    font-weight: bold;
 }
 
 .form-control {
-    color: #676b72;
+    color: #e1e1e2;
     background-color: #303338;
     border: 1px solid #222427;
 }
 .form-control:focus {
-    color: #676b72;
+    color: #e1e1e2;
     background-color: #303338;
     border: 1px solid #7289da;
     box-shadow: none;
+}
+
+.btn {
+    color: #fff;
+    background-color: #7289da;
+    border: none;
+}
+
+.btn:hover {
+    background-color: #6c82ce
 }
