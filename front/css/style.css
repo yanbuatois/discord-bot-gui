@@ -12,9 +12,11 @@
     color: grey;
 }
 
+/*
 html, body, body > .container-fluid, body > .container-fluid > .row {
     height: 100%;
 }
+*/
 
 body {
     color: #fff;
@@ -71,4 +73,8 @@ label {
 
 .btn:hover {
     background-color: #6c82ce
+}
+
+#connecting {
+    padding: .375rem .75rem;
 }

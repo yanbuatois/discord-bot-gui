@@ -5,34 +5,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'" />
-    <title>Please enter the bot token</title>
+    <title>Welcome to DBot GUI</title>
     <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="text-center">Welcome !</h1>
+    <div class="container">
+
+        <div class="row mt-3 mb-0">
+            <div class="col-12">
+                <h1 class="text-center">DBot GUI</h1>
             </div>
         </div>
-        <div class="row">
-            <p class="col-lg-12">To start, you need to enter your bot's token, to connect to it.</p>
+
+        <div class="row mt-0 mb-0">
+            <div class="col-12">
+                    <p class="text-center color-darkgray">Take control.</p>
+            </div>
         </div>
-        <div class="row">
-            <form class="col-lg-12" method="post" id="tokenform" action="#">
-                <fieldset id="form" class="form-group">
-                    <label class="col-row">Bot's token : </label>
-                    <div class="input-group col-row">
-                        <input class="form-control col-sm-12" type="text" name="token" id="token" placeholder="Token" maxlength="255" autofocus />
-                        <button type="submit" class="input-group-append btn btn-primary" id="sendButton">Continue</button>
+
+        <form id="tokenform" class="row" method="post" action="#">
+            <div class="col-12">
+                <div class="row mb-3">
+                    <div class="col-12">
+                            <label>Bot's token : </label>
+                            <input class="form-control col-sm-12" type="text" name="token" id="token" placeholder="Token" maxlength="255" autofocus />
                     </div>
-                </fieldset>
-            </form>
-        </div>
-        <div class="row">
-            <div class="col-lg-12 alert alert-primary d-none" id="connecting">Connecting...</div>
-        </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12 col-sm-3">
+                            <button type="submit" class="input-group-append btn btn-primary" id="sendButton">Continue</button>
+                    </div>
+                    <div class="col-12 col-sm-8 alert alert-primary d-none" id="connecting">Connecting...</div>
+                </div>
+            </div>
+        </form>
+
     </div>
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
