@@ -16,3 +16,42 @@ html, body, body > .container-fluid, body > .container-fluid > .row {
     height: 100%;
 }
 
+body {
+    color: #fff;
+    background-color: #36393f;
+}
+
+#servers {
+    background-color: #202225;
+}
+#channels {
+    background-color: #2f3136;
+}
+
+.server-button {
+    color: #6d6e71;
+    background-color: #202225;
+    border: none;
+    transition: 0.5s;
+}
+.server-button:hover {
+    color: #fff;
+    background-color: #2f3136;
+    transition: 0.5s;
+}
+
+label {
+    color: #afb1b3;
+}
+
+.form-control {
+    color: #676b72;
+    background-color: #303338;
+    border: 1px solid #222427;
+}
+.form-control:focus {
+    color: #676b72;
+    background-color: #303338;
+    border: 1px solid #7289da;
+    box-shadow: none;
+}
