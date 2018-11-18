@@ -12,15 +12,15 @@
     color: grey;
 }
 
-/*
-html, body, body > .container-fluid, body > .container-fluid > .row {
-    height: 100%;
-}
-*/
+
 
 body {
     color: #fff;
     background-color: #36393f;
+}
+
+.container-fluid > .row {
+    height: 100vh;
 }
 
 .color-darkgray {
