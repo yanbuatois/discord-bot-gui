@@ -78,3 +78,12 @@ label {
 #connecting {
     padding: .375rem .75rem;
 }
+
+button#pm {
+    color: #fff;
+    background-color: #7289da;
+    border: none;
+}
+button#pm:hover {
+    background-color: #6c82ce;
+}
