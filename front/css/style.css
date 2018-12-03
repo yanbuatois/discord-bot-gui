@@ -79,6 +79,15 @@ label {
     padding: .375rem .75rem;
 }
 
+a.channel-link {
+    color: #72767d;
+}
+
+a.channel-link:hover {
+    color : #fff;
+    background-color: #36393f;
+}
+
 button#pm {
     color: #fff;
     background-color: #7289da;
