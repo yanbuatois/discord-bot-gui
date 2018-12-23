@@ -86,6 +86,7 @@ a.channel-link {
 a.channel-link:hover {
     color : #fff;
     background-color: #36393f;
+    text-decoration: none;
 }
 
 button#pm {
