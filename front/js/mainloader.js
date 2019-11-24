@@ -1,5 +1,5 @@
 const ipc = require('electron').ipcRenderer;
-const {remote} = require('electron');
+const { remote } = require('electron');
 const htmlspecialchars = require('htmlspecialchars');
 const MarkdownIt = require('markdown-it');
 const markdown = new MarkdownIt;
@@ -26,14 +26,12 @@ function enableChannelListeners() {
         event.preventDefault();
         let id = this.id;
         let channelId = id.replace('channel', '');
-        const template = [
-            {
-                label: 'Generate an invitation',
-                click: () => {
-                    ipc.send('generateinvitation',channelId);
-                }
+        const template = [{
+            label: 'Generate an invitation',
+            click: () => {
+                ipc.send('generateinvitation', channelId);
             }
-        ];
+        }];
 
         const menu = remote.Menu.buildFromTemplate(template);
         menu.popup({});
@@ -42,9 +40,9 @@ function enableChannelListeners() {
 
 // Sort channels
 function channelsSort(a, b) {
-    if(a.position < b.position)
+    if (a.position < b.position)
         return -1;
-    else if(a.position > b.position)
+    else if (a.position > b.position)
         return 1;
     else
         return 0;
@@ -69,7 +67,7 @@ function decodeMessage(content) {
 
 $('#messageform').on('submit', () => {
     let messageField = $('#messagefield');
-    if(messageField.val() !== '') {
+    if (messageField.val() !== '') {
         ipc.send('post', messageField.val());
     }
 
@@ -99,7 +97,7 @@ ipc.on('srvinfo', (event, chan) => {
     textChannels = [];
 
     chan.forEach((channel) => {
-        switch(channel.type) {
+        switch (channel.type) {
             case 'text':
                 textChannels.push(channel);
                 break;
@@ -118,11 +116,11 @@ ipc.on('srvinfo', (event, chan) => {
 
     textChannels.forEach((channel) => {
         let parent = null;
-        if(channel.parentID !== null) {
+        if (channel.parentID !== null) {
             parent = $(`#ccategory${channel.parentID}`);
         }
 
-        if(parent === null) {
+        if (parent === null) {
             parent = $('#channelsList');
         }
 
@@ -131,11 +129,11 @@ ipc.on('srvinfo', (event, chan) => {
 
     voiceChannels.forEach((channel) => {
         let parent = null;
-        if(channel.parentID !== null) {
+        if (channel.parentID !== null) {
             parent = $(`#ccategory${channel.parentID}`);
         }
 
-        if(parent === null) {
+        if (parent === null) {
             parent = $('#channelsList');
         }
 
@@ -147,10 +145,11 @@ ipc.on('srvinfo', (event, chan) => {
 
 ipc.on('channelok', () => {
     $('#messageszone').removeClass('d-none');
+    $('#messages').empty();
 });
 
 ipc.on('newmessage', (event, message) => {
-    let {author, content, id} = message;
+    let { author, content, id } = message;
     content = decodeMessage(content);
     $('#messages').append(`<div class="row" id="msg${id}"><div class="col-lg-12"><strong id="msgauthor${id}">${author.username} :</strong> <span id="msgcontent${id}">${content}</span></div></div>`);
 });
@@ -163,7 +162,7 @@ ipc.on('updatedMessage', (event, oldMessage, newMessage) => {
 });
 
 ipc.on('deletedMessage', (event, message) => {
-    let {id} = message;
+    let { id } = message;
     $(`#msg${id}`).addClass("deletedMessage");
     $(`#msgcontent${id}`).append(" <span class='font-italic font-weight-bold'>(deleted)</span>")
 });
