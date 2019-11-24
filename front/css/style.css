@@ -26,12 +26,18 @@ body {
 
 #servers {
     background-color: #202225;
-   margin-bottom: 68px;
+    margin-bottom: 68px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 90vh;
 }
 
 #channels {
     background-color: #2f3136;
     margin-bottom: 68px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 90vh;
 }
 
 .server-button {
@@ -112,4 +118,25 @@ button#pm:hover {
     margin-bottom: 0px;
     margin-left: 0px;
     background-color: #36393f;
+}
+
+::-webkit-scrollbar {
+    border: none!important;
+    width: 6px!important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, .45)!important;
+    border-radius: 20px!important;
+    border: none!important;
+}
+
+::-webkit-scrollbar-track {
+    border: none!important;
+    background: var(--backgroundDark)!important;
+}
+
+::-webkit-scrollbar-track-piece {
+    background: 0 0!important;
+    border: none!important;
 }
