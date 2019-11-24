@@ -1,5 +1,4 @@
 @import url("bootstrap.min.css");
-
 .overflow-scroll {
     overflow-y: scroll;
 }
@@ -12,14 +11,12 @@
     color: grey;
 }
 
-
-
 body {
     color: #fff;
     background-color: #36393f;
 }
 
-.container-fluid > .row {
+.container-fluid>.row {
     height: 100vh;
 }
 
@@ -30,8 +27,10 @@ body {
 #servers {
     background-color: #202225;
 }
+
 #channels {
     background-color: #2f3136;
+    margin-bottom: 68px;
 }
 
 .server-button {
@@ -40,6 +39,7 @@ body {
     border: none;
     transition: 0.5s;
 }
+
 .server-button:hover {
     color: #fff;
     background-color: #2f3136;
@@ -58,6 +58,7 @@ label {
     background-color: #303338;
     border: 1px solid #222427;
 }
+
 .form-control:focus {
     color: #e1e1e2;
     background-color: #303338;
@@ -84,7 +85,7 @@ a.channel-link {
 }
 
 a.channel-link:hover {
-    color : #fff;
+    color: #fff;
     background-color: #36393f;
     text-decoration: none;
 }
@@ -94,6 +95,20 @@ button#pm {
     background-color: #7289da;
     border: none;
 }
+
 button#pm:hover {
     background-color: #6c82ce;
+}
+
+#messages {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 90vh;
+    margin-bottom: 68px;
+}
+
+#messagebox {
+    margin-bottom: 0px;
+    margin-left: 0px;
+    background-color: #36393f;
 }
