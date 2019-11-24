@@ -152,6 +152,9 @@ ipc.on('newmessage', (event, message) => {
     let { author, content, id } = message;
     content = decodeMessage(content);
     $('#messages').append(`<div class="row" id="msg${id}"><div class="col-lg-12"><strong id="msgauthor${id}">${author.username} :</strong> <span id="msgcontent${id}">${content}</span></div></div>`);
+    $('#messages').animate({
+        scrollTop: $(`#msg${id}`).offset().top + 'px'
+    }, 1);
 });
 
 ipc.on('updatedMessage', (event, oldMessage, newMessage) => {
