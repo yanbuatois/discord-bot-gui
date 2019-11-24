@@ -10,6 +10,13 @@ let guilds, guildChannels;
 let actualChannel = null;
 
 /**
+ * Loads messages from a map to the ui
+ */
+function messagestowindow(value, key, map) {
+    mainWindow.webContents.send('newmessage', value);
+}
+
+/**
  * Start of windows management
  */
 function createTokenWindow() {
@@ -127,7 +134,9 @@ ipcMain.on('changesrv', (event, id) => {
 
 ipcMain.on('changechannel', (event, id) => {
     actualChannel = discordClient.channels.get(id);
-
+    actualChannel.fetchMessages({ limit: 100 })
+        .then(messages => messages.forEach(messagestowindow))
+        .catch(console.error);
     event.sender.send('channelok');
 });
 
