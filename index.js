@@ -1,5 +1,5 @@
 const electron = require('electron');
-const {app, BrowserWindow, ipcMain, clipboard} = electron;
+const { app, BrowserWindow, ipcMain, clipboard } = electron;
 const Discord = require('discord.js');
 const discordClient = new Discord.Client();
 
@@ -8,7 +8,6 @@ let tokenWindow, mainWindow;
 let guilds, guildChannels;
 
 let actualChannel = null;
-
 /**
  * Loads messages from a map to the ui
  */
@@ -19,6 +18,7 @@ function messagestowindow(value, key, map) {
 /**
  * Start of windows management
  */
+
 function createTokenWindow() {
     tokenWindow = new BrowserWindow({
         width: 600,
@@ -76,7 +76,7 @@ discordClient.on('error', (err) => {
         message: `An error occurred with the bot connexion.\n(Error: ${err.message})\n`,
         buttons: ['Disconnect', 'Continue'],
     }, (response => {
-        if(response === 0) {
+        if (response === 0) {
             createTokenWindow();
             mainWindow.close();
         }
@@ -84,19 +84,19 @@ discordClient.on('error', (err) => {
 });
 
 discordClient.on('message', (message) => {
-    if(message.channel === actualChannel) {
+    if (message.channel === actualChannel) {
         mainWindow.webContents.send('newmessage', message);
     }
 });
 
 discordClient.on('messageUpdate', (oldMessage, newMessage) => {
-    if(newMessage.channel === actualChannel) {
+    if (newMessage.channel === actualChannel) {
         mainWindow.webContents.send('updatedMessage', oldMessage, newMessage);
     }
 });
 
 discordClient.on('messageDelete', (message) => {
-    if(message.channel === actualChannel) {
+    if (message.channel === actualChannel) {
         mainWindow.webContents.send('deletedMessage', message);
     }
 });
@@ -114,7 +114,7 @@ ipcMain.on('tokenSent', (event, token) => {
             type: 'error',
             title: 'Bot connexion failed',
             message: `The connexion to the bot failed.\n(Error: ${err.message})`,
-        },() => {
+        }, () => {
             tokenWindow.webContents.send('tokenFailed');
         });
     });
@@ -129,7 +129,7 @@ ipcMain.on('changesrv', (event, id) => {
     actualChannel = null;
     let server = discordClient.guilds.get(id);
     guildChannels = server.channels.array();
-    event.sender.send('srvinfo', guildChannels);
+    event.sender.send('srvinfo', guildChannels, server);
 });
 
 ipcMain.on('changechannel', (event, id) => {
@@ -140,7 +140,7 @@ ipcMain.on('changechannel', (event, id) => {
     event.sender.send('channelok');
 });
 
-ipcMain.on('post', (event , message) => {
+ipcMain.on('post', (event, message) => {
     const sendPromise = actualChannel.send(message);
 
     sendPromise.then(null, (err) => {
@@ -155,14 +155,14 @@ ipcMain.on('post', (event , message) => {
 ipcMain.on('generateinvitation', (event, channelId) => {
     let channel = discordClient.channels.get(channelId);
 
-    channel.createInvite({maxAge: 0}).then((invite) => {
+    channel.createInvite({ maxAge: 0 }).then((invite) => {
         electron.dialog.showMessageBox(mainWindow, {
             type: 'info',
             title: 'The invitation was created',
             message: `The invitation was created with following code:\n${invite.code}`,
             buttons: ['Ok', 'Copy']
         }, (response) => {
-            if(response === 1) {
+            if (response === 1) {
                 clipboard.writeText(invite.code);
             }
         });
