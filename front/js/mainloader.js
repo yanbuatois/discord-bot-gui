@@ -80,15 +80,16 @@ ipc.on('init', (event, guilds) => {
     guildsArray = guilds;
 
     guilds.forEach((guild) => {
-        $('#servers').append(`<div class='row'><button class="col-lg-12 server-button" id='server${guild.id}'>${guild.name}</button></div>`);
+        $('#servers').append(`<div class='row'><button class="col-lg-12 server-button" id='server${guild.id}'>${guild.name}</button><img class="servericon" src='https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.webp?size=64'></img></div>`);
     });
 
     enableServerListeners();
 });
 
-ipc.on('srvinfo', (event, chan) => {
+ipc.on('srvinfo', (event, chan, servercurrent) => {
     $('#channels').removeClass('d-none');
     $('#channelsList').empty();
+    $("#servername").html(servercurrent.name);
 
     chan.sort(channelsSort);
     channels = chan;
