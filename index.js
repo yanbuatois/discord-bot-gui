@@ -12,7 +12,11 @@ let actualChannel = null;
  * Loads messages from a map to the ui
  */
 function messagestowindow(value, key, map) {
-    mainWindow.webContents.send('newmessage', value);
+    var url = 0;
+    value.attachments.forEach(attachment => {
+        url = attachment.url;
+    });
+    mainWindow.webContents.send('newmessage', value, url);
 }
 
 /**
@@ -47,7 +51,7 @@ function createMainWindow() {
         autoHideMenuBar: true,
         enableLargerThanScreen: true,
     });
-
+    mainWindow.setMinimumSize(940, 500);
     mainWindow.loadFile('front/main.html');
     mainWindow.on('closed', () => {
         mainWindow = null;
@@ -59,13 +63,13 @@ app.on('window-all-closed', () => {
     app.quit();
 });
 app.on('ready', createTokenWindow);
-
 /**
  * End of Windows Management
  * Start of Discord Bot Management
  */
 discordClient.on('ready', () => {
     createMainWindow();
+    discordClient.user.setActivity('git.io/JePgt');
     tokenWindow.close();
 });
 
@@ -112,8 +116,8 @@ ipcMain.on('tokenSent', (event, token) => {
     loginPromise.then(null, (err) => {
         electron.dialog.showMessageBox(tokenWindow, {
             type: 'error',
-            title: 'Bot connexion failed',
-            message: `The connexion to the bot failed.\n(Error: ${err.message})`,
+            title: 'Bot connection failed',
+            message: `The connection to the bot failed.\n(Error: ${err.message})`,
         }, () => {
             tokenWindow.webContents.send('tokenFailed');
         });
