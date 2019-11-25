@@ -89,7 +89,7 @@ discordClient.on('error', (err) => {
 
 discordClient.on('message', (message) => {
     if (message.channel === actualChannel) {
-        mainWindow.webContents.send('newmessage', message);
+        messagestowindow(message);
     }
 });
 
