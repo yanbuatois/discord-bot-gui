@@ -111,7 +111,7 @@ button#pm:hover {
     overflow-y: scroll;
     overflow-x: hidden;
     height: 90vh;
-    margin-bottom: 10vh;
+    margin-bottom: 68px;
 }
 
 #messagebox {
@@ -144,4 +144,24 @@ button#pm:hover {
 .servericon {
     height: 48px;
     margin: 0 auto;
+    border-radius: 50%;
+}
+
+.avatars {
+    border-radius: 50%;
+    height: 48px;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    vertical-align: top;
+}
+
+.msgbody {
+    display: inline-block;
+    width: calc(100% - 88px);
+    word-wrap: break-word;
+}
+
+.attachedimage {
+    height: 50%;
 }
