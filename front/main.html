@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https:" />
     <title>Bot management</title>
     <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -20,7 +20,7 @@
             </div>
             <div class="col-sm-2 d-none" id="channels">
                 <div class="row ml-1">
-                    <h3>Channels</h3>
+                    <h4 id="servername"></h4>
                 </div>
                 <div class="row" id="channelsList">
                     <!-- All channels in the server -->
