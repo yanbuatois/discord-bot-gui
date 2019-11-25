@@ -26,7 +26,7 @@ body {
 
 #servers {
     background-color: #202225;
-    margin-bottom: 68px;
+    margin-bottom: 10vh;
     overflow-y: scroll;
     overflow-x: hidden;
     height: 90vh;
@@ -34,7 +34,7 @@ body {
 
 #channels {
     background-color: #2f3136;
-    margin-bottom: 68px;
+    margin-bottom: 10vh;
     overflow-y: scroll;
     overflow-x: hidden;
     height: 90vh;
@@ -111,7 +111,7 @@ button#pm:hover {
     overflow-y: scroll;
     overflow-x: hidden;
     height: 90vh;
-    margin-bottom: 68px;
+    margin-bottom: 10vh;
 }
 
 #messagebox {
@@ -139,4 +139,9 @@ button#pm:hover {
 ::-webkit-scrollbar-track-piece {
     background: 0 0!important;
     border: none!important;
+}
+
+.servericon {
+    height: 48px;
+    margin: 0 auto;
 }
