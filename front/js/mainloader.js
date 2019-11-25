@@ -70,7 +70,6 @@ $('#messageform').on('submit', () => {
     if (messageField.val() !== '') {
         ipc.send('post', messageField.val());
     }
-
     messageField.val('');
 
     return false;
@@ -80,7 +79,7 @@ ipc.on('init', (event, guilds) => {
     guildsArray = guilds;
 
     guilds.forEach((guild) => {
-        $('#servers').append(`<div class='row'><button class="col-lg-12 server-button" id='server${guild.id}'>${guild.name}</button><img class="servericon" src='https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.webp?size=64'></img></div>`);
+        $('#servers').append(`<div class='row'><button class="col-lg-12 server-button" id='server${guild.id}'>${guild.name}</button><img class="servericon serverlink " src='https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.webp?size=64'></img></div>`);
     });
 
     enableServerListeners();
@@ -149,10 +148,13 @@ ipc.on('channelok', () => {
     $('#messages').empty();
 });
 
-ipc.on('newmessage', (event, message) => {
+ipc.on('newmessage', (event, message, attachm) => {
     let { author, content, id } = message;
     content = decodeMessage(content);
-    $('#messages').append(`<div class="row" id="msg${id}"><div class="col-lg-12"><strong id="msgauthor${id}">${author.username} :</strong> <span id="msgcontent${id}">${content}</span></div></div>`);
+    if (author.avatar == null) $('#messages').append(`<div class="row" id="msg${id}"><div class="col-lg-12"><div><img class="avatars" src="https://discordapp.com/assets/6debd47ed13483642cf09e832ed0bc1b.png"></img><div class="msgbody"><strong id="msgauthor${id}">${author.username}</strong></br><span id="msgcontent${id}">${content}</span>`);
+    else $('#messages').append(`<div class="row" id="msg${id}"><div class="col-lg-12"><div><img class="avatars" src="https://cdn.discordapp.com/avatars/${author.id}/${author.avatar}.webp?size=64"></img><div class="msgbody"><strong id="msgauthor${id}">${author.username}</strong></br><span id="msgcontent${id}">${content}</span></div></div></div></div>`);
+    if (attachm != 0) $('#messages').append(`<img class="attachedimage" src="${attachm}"></img>`);
+    $('#messages').append(`</div></div></div></div>`);
     $('#messages').animate({
         scrollTop: $(`#msg${id}`).offset().top + 'px'
     }, 1);
