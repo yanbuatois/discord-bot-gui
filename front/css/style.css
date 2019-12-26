@@ -163,5 +163,12 @@ button#pm:hover {
 }
 
 .attachedimage {
-    height: 50%;
+    max-height: 300px;
+    max-width: 400px;
+}
+
+#emoji {
+    width: 3rem;
+    height: 3rem;
+    min-height: 3rem;
 }
