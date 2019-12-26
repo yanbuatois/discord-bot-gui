@@ -151,16 +151,16 @@ ipc.on('channelok', () => {
 ipc.on('newmessage', (event, message, attachm) => {
     let { author, content, id } = message;
     content = decodeMessage(content);
-    if (author.avatar == null) $('#messages').append(`<div class="row" id="msg${id}"><div class="col-lg-12"><div><img class="avatars" src="https://discordapp.com/assets/6debd47ed13483642cf09e832ed0bc1b.png"></img><div class="msgbody"><strong id="msgauthor${id}">${author.username}</strong></br><span id="msgcontent${id}">${content}</span>`);
-    else $('#messages').append(`<div class="row" id="msg${id}"><div class="col-lg-12"><div><img class="avatars" src="https://cdn.discordapp.com/avatars/${author.id}/${author.avatar}.webp?size=64"></img><div class="msgbody"><strong id="msgauthor${id}">${author.username}</strong></br><span id="msgcontent${id}">${content}</span>`);
+    var msgApp = "";
+    if (author.avatar == null) msgApp += `<div class="row" id="msg${id}"><div class="col-lg-12"><div><img class="avatars" src="https://discordapp.com/assets/6debd47ed13483642cf09e832ed0bc1b.png"></img><div class="msgbody"><strong id="msgauthor${id}">${author.username}</strong></br><span id="msgcontent${id}">${content}</span>`;
+    else msgApp += `<div class="row" id="msg${id}"><div class="col-lg-12"><div><img class="avatars" src="https://cdn.discordapp.com/avatars/${author.id}/${author.avatar}.webp?size=64"></img><div class="msgbody"><strong id="msgauthor${id}">${author.username}</strong></br><span id="msgcontent${id}">${content}</span>`;
     if (attachm != 0)
-        if (attachm.endsWith('jpg') || attachm.endsWith('webp') || attachm.endsWith('png') || attachm.endsWith('gif') || attachm.endsWith('jpeg')) $(`#msg${id}`).append(`<img class="attachedimage" src="${attachm}"></img>`);
-        else if (attachm != 0) $(`#msg${id}`).append(`<div class="attachedfile"></div>`);
-    $('#messages').append(`</div></div></div></div>`);
-    $(`#msg${id}`).append(`<img aria-label=":thonk:" src="https://cdn.discordapp.com/emojis/${content.substring(content.length-1,18)}.png?v=1" alt=":thonk:" draggable="false" class="emoji jumboable">`);
+        if (attachm.endsWith('jpg') || attachm.endsWith('webp') || attachm.endsWith('png') || attachm.endsWith('gif') || attachm.endsWith('jpeg')) msgApp += `<img class="attachedimage" src="${attachm}"></img>`;
+        else if (attachm != 0) msgApp += `<div class="attachedfile"></div>`;
+    $('#messages').append(msgApp);
     $('#messages').animate({
         scrollTop: $(`#msg${id}`).offset().top + 'px'
-    }, 1);
+    }, 10);
 });
 
 ipc.on('updatedMessage', (event, oldMessage, newMessage) => {
