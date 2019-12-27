@@ -167,8 +167,7 @@ button#pm:hover {
     max-width: 400px;
 }
 
-#emoji {
-    width: 3rem;
-    height: 3rem;
-    min-height: 3rem;
+.emoji {
+    height: 1rem;
+    min-height: 2rem;
 }
