@@ -152,8 +152,11 @@ ipc.on('newmessage', (event, message, attachm) => {
     let { author, content, id } = message;
     content = decodeMessage(content);
     var msgApp = "";
+    console.log(attachm);
     if (author.avatar == null) msgApp += `<div class="row" id="msg${id}"><div class="col-lg-12"><div><img class="avatars" src="https://discordapp.com/assets/6debd47ed13483642cf09e832ed0bc1b.png"></img><div class="msgbody"><strong id="msgauthor${id}">${author.username}</strong></br><span id="msgcontent${id}">${content}</span>`;
-    else msgApp += `<div class="row" id="msg${id}"><div class="col-lg-12"><div><img class="avatars" src="https://cdn.discordapp.com/avatars/${author.id}/${author.avatar}.webp?size=64"></img><div class="msgbody"><strong id="msgauthor${id}">${author.username}</strong></br><span id="msgcontent${id}">${content}</span>`;
+    else msgApp += `<div class="row" id="msg${id}"><div class="col-lg-12"><div><img class="avatars" src="https://cdn.discordapp.com/avatars/${author.id}/${author.avatar}.webp?size=64"></img><div class="msgbody"><strong id="msgauthor${id}">${author.username}</strong></br><span id="msgcontent${id}">`;
+    msgApp += content.replace(/&lt;:\p{Any}+:\d+&gt;/gu, `<img class="emoji" alt="${content.match(/:\p{Any}+(?=:):/gu)}" src="https://cdn.discordapp.com/emojis/${content.match(/\d+(?=&gt)/g)}.png?v=1"></img>`);
+    msgApp += "</span>";
     if (attachm != 0)
         if (attachm.endsWith('jpg') || attachm.endsWith('webp') || attachm.endsWith('png') || attachm.endsWith('gif') || attachm.endsWith('jpeg')) msgApp += `<img class="attachedimage" src="${attachm}"></img>`;
         else if (attachm != 0) msgApp += `<div class="attachedfile"></div>`;
