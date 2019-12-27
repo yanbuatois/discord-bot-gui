@@ -51,7 +51,7 @@ function createMainWindow() {
         autoHideMenuBar: true,
         enableLargerThanScreen: true,
     });
-    mainWindow.setMinimumSize(940, 500);
+    mainWindow.setMinimumSize(1000, 750);
     mainWindow.loadFile('front/main.html');
     mainWindow.on('closed', () => {
         mainWindow = null;
@@ -178,7 +178,12 @@ ipcMain.on('generateinvitation', (event, channelId) => {
         }, () => {});
     });
 });
-
+ipcMain.on('usertagged', (event, userID) => {
+    discordClient.fetchUser(userID).then(function(value) {
+        if (discordClient.user.id == userID) event.returnValue = `<span class="mention mentioned" role="button">@` + value.username;
+        event.returnValue = `<span class="mention" role="button">@` + value.username;
+    });
+});
 /**
  * End of IPC Management
  */
