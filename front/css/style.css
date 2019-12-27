@@ -171,3 +171,21 @@ button#pm:hover {
     height: 1rem;
     min-height: 2rem;
 }
+
+.mention {
+    color: #7289da;
+    background-color: rgba(114, 137, 218, .1);
+    border-radius: 3px;
+    font-weight: 500;
+}
+
+.mentioned {
+    display: inline-block;
+    width: 100%;
+    background-color: rgba(250, 166, 26, 0.1);
+}
+
+.msgcontent {
+    width: 100%;
+    display: inline-block;
+}
