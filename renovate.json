@@ -1,5 +1,4 @@
 {
-  "config": {
     "enabled": true,
     "includeForks": true,
     "packageRules": [
@@ -13,5 +12,4 @@
         "automerge": true
       }
     ]
-  }
 }
