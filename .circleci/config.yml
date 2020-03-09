@@ -1,6 +1,0 @@
-deploy-linux:
-  docker:
-    - image: electronuserland/builder:wine
-  steps:
-    - run: yarn --link-duplicates --pure-lockfile
-    - run: yarn release --linux --win
