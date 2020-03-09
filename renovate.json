@@ -1,6 +1,7 @@
 {
     "enabled": true,
     "includeForks": true,
+    "automerge": true,
     "packageRules": [
       {
         "updateTypes": [
@@ -9,7 +10,6 @@
           "pin",
           "digest"
         ],
-        "automerge": true
       }
     ]
 }
