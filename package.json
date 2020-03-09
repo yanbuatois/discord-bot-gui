@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dracoctix/discord-bot-gui.git"
+    "url": "git+https://github.com/sencrash/discord-bot-gui.git"
   },
   "keywords": [
     "discord",
@@ -19,9 +19,10 @@
   "author": "Dracoctix",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dracoctix/discord-bot-gui/issues"
+    "url": "https://github.com/dracoctix/discord-bot-gui/issues",
+    "url": "https://github.com/sencrash/discord-bot-gui/issues"
   },
-  "homepage": "https://github.com/dracoctix/discord-bot-gui#readme",
+  "homepage": "https://github.com/sencrash/discord-bot-gui#readme",
   "dependencies": {
     "discord.js": "^12.0.0",
     "electron": "^8.0.0",
